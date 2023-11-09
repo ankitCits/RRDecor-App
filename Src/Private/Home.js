@@ -215,7 +215,7 @@ const Home = () => {
       // showHideTransition={statusBarTransition}
       // hidden={hidden}
       />
-      <Spinner visible={isLoading || isBannerLoading} />
+      {/* <Spinner visible={isLoading || isBannerLoading} /> */}
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
@@ -312,6 +312,15 @@ const Home = () => {
             onChangeIndex={({ index }) => setCurrentIndex(index)}
           /> */}
 
+       <View
+       style={[styles.logoInner,]}
+       >
+       <Image 
+         source={require('../Assets/Image/RRDecorLogo.png')}
+         style={{height:14.93,width:120,}}
+         />
+       </View>
+
           <FlatList
             ref={flatListRef}
             data={bannerData}
@@ -328,14 +337,6 @@ const Home = () => {
 
         <View style={styles.containers}>
 
-       <View
-       style={[styles.logoInner,]}
-       >
-       <Image 
-         source={require('../Assets/Image/RRDecorLogo.png')}
-         style={{height:14.93,width:120,}}
-         />
-       </View>
 
           <View
            style={styles.logoInner}
@@ -380,13 +381,14 @@ const Home = () => {
             backgroundColor: '#fff',
             height: hp('5%'),
             width: wp('100%'),
-            fontSize: 18,
+            fontSize: 24,
             fontWeight: '500',
             paddingLeft: wp('4%'),
             paddingTop: hp('1%'),
+            textAlign:'center'
 
           }}>
-          Featured collection
+          Collections
         </Text>
 
         <View
@@ -431,12 +433,11 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     // backgroundColor: 'red',
     borderColor: '#EAEAEA',
-    // borderWidth: 1,
+    borderWidth: 0.5,
     margin: 0,
     // justifyContent: 'center',
     // alignItems: 'center'
     justifyContent: 'space-evenly',
-
     alignItems:'center',
     marginBottom:0,
     // alignItems:'center'
@@ -488,7 +489,7 @@ const styles = StyleSheet.create({
     // backgroundColor: '#ecf0f1',
   },
   logoInner:{
-    padding:10,
+    padding:15,
     justifyContent:'center',
     alignItems:'center',
   // backgroundColor:'red'

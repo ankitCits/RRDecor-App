@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {
   Image,
+  Keyboard,
   ScrollView,
   StyleSheet,
   Text,
@@ -64,21 +65,24 @@ const Search = () => {
           source={require('../Assets/Icons/sec.png')}
           style={styles.searchIcon}
         />
-        <TextInput
-          placeholderTextColor="#8A8A8A"
-          placeholder="Search Collection"
-          style={styles.searchInput}
-          value={search}
-          onChangeText={text => {
-            setSearch(text);
+      <TextInput
+        placeholderTextColor="#8A8A8A"
+        placeholder="Search Collection"
+        style={styles.searchInput}
+        value={search}
+        onChangeText={text => {
+          setSearch(text);
 
-            const params = {
-              userToken: profileData.auth_token,
-              search: text,
-            };
-            dispatch(getSearchData(params));
-          }}
-        />
+          const params = {
+            userToken: profileData.auth_token,
+            search: text,
+          };
+          dispatch(getSearchData(params));
+        }}
+        returnKeyType="done" // Add returnKeyType prop
+        onSubmitEditing={Keyboard.dismiss} // Dismiss the keyboard on submit
+        keyboardType="default" // Set the keyboardType to 'default'
+      />
       </View>
 
       {/* <TouchableOpacity

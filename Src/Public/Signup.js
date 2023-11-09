@@ -84,12 +84,12 @@ const Signup = () => {
       mobile_number: mobile,
       password: password,
       confirm_password: confirmPassword,
-      city: city,
-      state: state,
-      company: company,
-      gst_no:gstNo,
-      gst_type:gstType,
-      address:address
+      // city: city,
+      // state: state,
+      // company: company,
+      // gst_no:gstNo,
+      // gst_type:gstType,
+      // address:address
     };
     dispatch(signUp(credentials));
   };
@@ -101,7 +101,7 @@ const Signup = () => {
   useEffect(() => {
     if (sentOtp === true) {
       navigation.navigate('Otp', {
-        email: email,
+        email: mobile,
       });
     }
   }, [handleSignUp]);
@@ -128,26 +128,26 @@ const Signup = () => {
         </Text>
           <View style={styles.inputContainer}>
             <View style={styles.inputIconContainer}>
-              <IconG name="user" size={25} />
+              <IconG name="user" size={20} />
             </View>
             <TextInput
               style={styles.input}
               onChangeText={text => setName(text)}
               value={name}
               placeholder="Name"
-              placeholderTextColor="#000"
+              placeholderTextColor="#999999"
             />
           </View>
           <View style={[styles.inputContainer, styles.inputContainerPassword]}>
             <View style={styles.inputIconContainer}>
-              <IconM name="email" size={25} />
+              <IconM name="email" size={18} />
             </View>
             <TextInput
               style={styles.input}
               onChangeText={text => setEmail(text)}
               value={email}
               placeholder="Email"
-              placeholderTextColor="#000"
+              placeholderTextColor="#999999"
             />
           </View>
           <View style={[styles.inputContainer, styles.inputContainerPassword]}>
@@ -159,7 +159,7 @@ const Signup = () => {
               onChangeText={text => setMobile(text)}
               value={mobile}
               placeholder="Mobile Number"
-              placeholderTextColor="#000"
+              placeholderTextColor="#999999"
               keyboardType='number-pad'
             />
           </View>
@@ -167,7 +167,7 @@ const Signup = () => {
             <View style={styles.inputIconContainer}>
               <Image
                 source={require('../Assets/Icons/lock.png')}
-                style={{width: 20, height: 20}}
+                style={{width: 18, height: 18}}
                 resizeMode="contain"
               />
             </View>
@@ -176,7 +176,7 @@ const Signup = () => {
               onChangeText={text => setPassword(text)}
               value={password}
               placeholder="Password"
-              placeholderTextColor="#000"
+              placeholderTextColor="#999999"
               secureTextEntry={true}
             />
           </View>
@@ -184,7 +184,7 @@ const Signup = () => {
             <View style={styles.inputIconContainer}>
               <Image
                 source={require('../Assets/Icons/lock.png')}
-                style={{width: 20, height: 20}}
+                style={{width: 18, height: 18}}
                 resizeMode="contain"
               />
             </View>
@@ -193,11 +193,11 @@ const Signup = () => {
               onChangeText={text => setConfirmPassword(text)}
               value={confirmPassword}
               placeholder="Confirm Password"
-              placeholderTextColor="#000"
+              placeholderTextColor="#999999"
               secureTextEntry={true}
             />
           </View>
-          <View style={[styles.inputContainer, styles.inputContainerPassword]}>
+          {/* <View style={[styles.inputContainer, styles.inputContainerPassword]}>
             <View style={styles.inputIconContainer}>
               <IconL name="location-sharp" size={25} />
             </View>
@@ -206,7 +206,19 @@ const Signup = () => {
               onChangeText={text => setCompany(text)}
               value={company}
               placeholder="Company"
-              placeholderTextColor="#000"
+              placeholderTextColor="#999999"
+            />
+          </View>
+          <View style={[styles.inputContainer, styles.inputContainerPassword]}>
+            <View style={styles.inputIconContainer}>
+              <IconL name="navigate-circle-outline" size={25} />
+            </View>
+            <TextInput
+              style={styles.input}
+              onChangeText={text => setaddress(text)}
+              value={address}
+              placeholder="Address"
+              placeholderTextColor="#999999"
             />
           </View>
           <View style={[styles.inputContainer, styles.inputContainerPassword]}>
@@ -218,7 +230,7 @@ const Signup = () => {
               onChangeText={text => setCity(text)}
               value={city}
               placeholder="City"
-              placeholderTextColor="#000"
+              placeholderTextColor="#999999"
             />
           </View>
           <View style={[styles.inputContainer, styles.inputContainerPassword]}>
@@ -230,7 +242,7 @@ const Signup = () => {
               onChangeText={text => setState(text)}
               value={state}
               placeholder="State"
-              placeholderTextColor="#000"
+              placeholderTextColor="#999999"
             />
           </View>
 
@@ -243,11 +255,11 @@ const Signup = () => {
               onChangeText={text => setgstNo(text)}
               value={gstNo}
               placeholder="Gst Number"
-              placeholderTextColor="#000"
+              placeholderTextColor="#999999"
             />
-          </View>
+          </View> */}
 
-          <View style={[styles.inputContainer, styles.inputContainerPassword]}>
+          {/* <View style={[styles.inputContainer, styles.inputContainerPassword]}>
             <View style={styles.inputIconContainer}>
               <IconL name="cash-outline" size={25} />
             </View>
@@ -256,22 +268,11 @@ const Signup = () => {
               onChangeText={text => setgstType(text)}
               value={gstType}
               placeholder="Gst Type"
-              placeholderTextColor="#000"
+              placeholderTextColor="#999999"
             />
-          </View>
+          </View> */}
 
-          <View style={[styles.inputContainer, styles.inputContainerPassword]}>
-            <View style={styles.inputIconContainer}>
-              <IconL name="navigate-circle-outline" size={25} />
-            </View>
-            <TextInput
-              style={styles.input}
-              onChangeText={text => setaddress(text)}
-              value={address}
-              placeholder="Address"
-              placeholderTextColor="#000"
-            />
-          </View>
+
 
           {localError && <Text style={styles.errorText}>{localError}</Text>}
           {signUperror && <Text style={styles.errorText}>{signUperror}</Text>}
@@ -333,7 +334,7 @@ const styles = StyleSheet.create({
   input: {
     height: 44,
     marginLeft: wp('3%'),
-    color: '#999999',
+    color: '#000',
     // backgroundColor:'red',
     width: '80%',
     

@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
+  Keyboard,
+  // Picker
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import {
@@ -14,7 +16,8 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import { useNavigation } from '@react-navigation/native';
-
+// import {Picker} from '@react-native-picker/picker';
+import DropDownPicker from 'react-native-dropdown-picker';
 import { useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProductRollData } from '../Redux/Slices/productRollSlice';
@@ -27,7 +30,16 @@ import { selectCartAdded } from '../Redux/Slices/cartSlice';
 const Searching = () => {
   const navigation = useNavigation();
   const isAddedToCart = useSelector(selectCartAdded);
+  const [selectedMode, setSelectedMode] = useState('SM AIR');
+  const mode = [
+    "SM AIR",
+    "SM SURFACE",
+    "SMGC",
+    "Other"
+]
 
+const [open, setOpen] = useState(false);
+const [value, setValue] = useState(null);
   const route = useRoute();
   const { item } = route.params;
   console.log('item is', item);
@@ -40,6 +52,8 @@ const Searching = () => {
   console.log('product  roll data>>>', productRollDataIs);
   const productDetailsOnly = productRollDataIs?.item_details
   let productDetailsRoll = productRollDataIs?.roll_no
+
+  
   useEffect(() => {
     if (productDetailsRoll?.length) {
       productDetailsRoll = productDetailsRoll?.map(item => {
@@ -77,14 +91,22 @@ const Searching = () => {
       setItems(newItems);
     }
 
-    console.log('>>>>XXXX,', newItems);
+    var totalUnitPrice = newItems?.reduce((total, item) => {
+    const parsedUnitPrice = parseFloat(item.unit_price);
+    if (!isNaN(parsedUnitPrice)) {
+      return total + parsedUnitPrice;
+    }
+    return total;
+  }, 0);
+
+  console.log(">>>>>>>",totalUnitPrice)
+  setQuantity(totalUnitPrice)
   };
 
 
-  const totalUnitPrice = items?.reduce((total, item) => {
-    return total + parseFloat(item.unit_price);
-  }, 0);
-
+  // const totalUnitPrice = items?.reduce((total, item) => {
+  //   return total + parseFloat(item.unit_price);
+  // }, 0);
 
 
 
@@ -98,7 +120,7 @@ const Searching = () => {
   }, []);
 
   const [selectedItem, setSelectedItem] = useState(0);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState('');
 
   function formatDate(inputDate) {
     const date = new Date(inputDate);
@@ -205,7 +227,7 @@ const Searching = () => {
     <View
       style={{
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
         height: hp('5%'),
       }}>
@@ -213,7 +235,7 @@ const Searching = () => {
         style={{
           width: wp('30%'),
           borderColor: '#000',
-          borderWidth: 0.5,
+          // borderWidth: 0.5,
           height: hp('5%'),
           justifyContent: 'center',
           // alignItems: 'center',
@@ -233,7 +255,7 @@ const Searching = () => {
         style={{
           width: wp('30%'),
           borderColor: '#000',
-          borderWidth: 0.5,
+          // borderWidth: 0.5,
           height: hp('5%'),
           justifyContent: 'center',
           alignItems: 'center',
@@ -242,7 +264,7 @@ const Searching = () => {
           {item?.Quantity}
         </Text>
       </View>
-      <View
+      {/* <View
         style={{
           width: wp('34%'),
           borderColor: '#000',
@@ -269,6 +291,11 @@ const Searching = () => {
             value={item.unit_price}
             onChangeText={text => handlePriceChange(text, index)}
             keyboardType='number-pad'
+              returnKeyType='done' // Add the returnKeyType prop for the "Done" button
+            onSubmitEditing={() => {
+              // Close the keyboard upon pressing the "Done" button
+              Keyboard.dismiss();
+            }}
           />
 
           :
@@ -277,7 +304,7 @@ const Searching = () => {
           </Text>
         }
 
-      </View>
+      </View> */}
     </View>
   );
   const { addedtoCart, isCartLoading, CartError } = useSelector(
@@ -293,7 +320,7 @@ const Searching = () => {
       data: {
         product_id: productDetailsOnly[0].id,
         // roll_id: productRollDataIs[selectedItem].id,
-        quantity: totalUnitPrice,
+        quantity: quantity,
       },
       userToken: profileData.auth_token,
     };
@@ -340,10 +367,10 @@ const Searching = () => {
     }
   };
 
-  console.log("^^ items>> ^^", items)
+  console.log("^^ items>> ^^", productDetailsRoll)
 
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'#fff'}}>
       <View style={{ backgroundColor: '#fff', flex: 1 }}>
         <Spinner visible={isLoading} />
         <Spinner visible={isCartLoading} />
@@ -495,7 +522,7 @@ const Searching = () => {
                   Available Quantity
                 </Text>
 
-                <Text
+                {/* <Text
                   style={{
                     color: '#fff',
                     fontSize: wp('2.5%'),
@@ -504,14 +531,19 @@ const Searching = () => {
                     textAlign: 'center',
                   }}>
                   Quantity
-                </Text>
+                </Text> */}
               </View>
               <FlatList
-                data={items}
+                data={productDetailsRoll}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => index.toString()}
               />
             </View>
+
+
+
+
+
             <View
               style={{
                 width: wp('90%'),
@@ -529,21 +561,41 @@ const Searching = () => {
               <Text>
                 Total Quantity :
               </Text>
-              <Text
+              {/* <Text
                 style={{
                   color: '#000',
-                  fontSize: wp('4%'),
+                  fontSize: wp('5%'),
                   textAlignVertical: 'center',
                   textAlign: 'center',
                   width: '30%',
                   borderLeftColor: '#EBEBEB',
                   borderLeftWidth: 1,
                   height: '100%',
-                  alignSelf: 'center'
+                  alignSelf: 'center',
+                  marginTop:'10%'
                 }}
               >
-                {isNaN(totalUnitPrice) ? '' : totalUnitPrice}
-              </Text>
+               {quantity}
+              </Text> */}
+
+            <TextInput
+              placeholderTextColor="#000"
+              placeholder={quantity}
+              style={{
+                color: '#000',
+                
+                fontSize: wp('4%'),
+                width: '60%',
+              }}
+              value={quantity}
+              // onChangeText={text => {
+              //   const numericValue = text.replace(/[^0-9]/g, '');
+
+              //   setQuantity(numericValue);
+              // }}
+              onChangeText={handleQuantityChange}
+              keyboardType="numeric"
+            />
             </View>
             {CartError && (
               <Text
@@ -557,6 +609,8 @@ const Searching = () => {
                 {CartError}
               </Text>
             )}
+
+
             <TouchableOpacity
               style={{
                 width: 344,
@@ -571,7 +625,7 @@ const Searching = () => {
               }}
               //onPress={() => navigation.navigate('Shop')}
               onPress={() => {
-                if (totalUnitPrice == 0) {
+                if (quantity == 0) {
                   alert('please enter quantity greater than 0');
                   return
                 } else {
@@ -588,8 +642,35 @@ const Searching = () => {
                 Add to Cart
               </Text>
             </TouchableOpacity>
+
+            {/* <View
+          style={{
+            // Adjust the styles according to your requirements
+            alignSelf: 'center',
+            marginTop: hp('2%'),
+            marginBottom: hp('2%'),
+            width: wp('90%'),
+          }}
+          >
+
+          <DropDownPicker
+          open={open}
+          value={value}
+          items={productRollDataIs?.mode_of_transport}
+          setOpen={setOpen}
+          setValue={setValue}
+          // setItems={setItemss}
+          closeOnTouchOutside={false}
+          />
+          </View> */}
           </>
         )}
+      </View>
+      <View
+      style={{width:'90%',alignSelf:'center',marginBottom:'5%'}}
+      >
+      <Text>
+Please call our sales team to check physical quantity, if stock does not show here.</Text>
       </View>
     </ScrollView>
   );

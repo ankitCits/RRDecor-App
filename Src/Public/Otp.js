@@ -34,6 +34,7 @@ import {
 } from '../Redux/Slices/authSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
+import { BASE_URL } from '../conifg';
 
 const Otp = () => {
   const dispatch = useDispatch();
@@ -60,32 +61,49 @@ const Otp = () => {
     setValue('');
   };
 
-  useEffect(() => {
-    dispatch(updateSentOtpValue());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(updateSentOtpValue());
+  // }, []);
 
-  useEffect(() => {
-    // Listen for navigation changes
-    const unsubscribe = navigation.addListener('focus', () => {
-      dispatch(updateSentOtpValue());
-    });
+  // useEffect(() => {
+  //   // Listen for navigation changes
+  //   const unsubscribe = navigation.addListener('focus', () => {
+  //     dispatch(updateSentOtpValue());
+  //   });
 
-    // Clean up the listener when the component unmounts
-    return unsubscribe;
-  }, [navigation]);
+  //   // Clean up the listener when the component unmounts
+  //   return unsubscribe;
+  // }, [navigation]);
 
-  const handleLogin = () => {
+  const handleLogin = async() => {
     if (value.length !== 6) {
       setLocalError('Please add 6 digit otp');
 
       return;
     } else {
       setLocalError('');
-      const credentials = {
-        email: email,
-        otp: value,
-      };
-      dispatch(verifyEmail(credentials));
+
+
+      const res = await fetch(`${BASE_URL}/verifyemail/`, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: await AsyncStorage.getItem('token'),
+        },
+        body: JSON.stringify({
+          email: email,
+          otp: value,
+        }),
+      });
+      const result = await res.json();
+      if(result?.auth_token){
+        navigation.navigate('Login');
+      }else{
+        setLocalError(result?.result);
+      }
+      // let checkResponse = await dispatch(verifyEmail(result));
+      console.log(">>>>checkResponse >> ",result)
+      return
     }
   };
 
@@ -94,14 +112,15 @@ const Otp = () => {
     setValue('');
   };
 
-  const isUserEmailVerified = useSelector(selectIsSignUpVerified);
-  console.log(isUserEmailVerified);
+  // const isUserEmailVerified = useSelector(selectIsSignUpVerified);
+  // console.log("isUserEmailVerified>>>>",isUserEmailVerified);
 
-  useEffect(() => {
-    if (isUserEmailVerified === true) {
-      navigation.navigate('Login');
-    }
-  }, [handleLogin]);
+
+  // useEffect(() => {
+  //   if (isUserEmailVerified === true) {
+  //     navigation.navigate('Login');
+  //   }
+  // }, [handleLogin]);
 
   return (
     <SafeAreaView style={styles.container}>

@@ -26,7 +26,7 @@ const SplashScreen = () => {
       }}
       >
       <Image
-        source={require('../Assets/Image/logo3x.png')}
+        source={require('../Assets/Image/logo.png')}
         style={{
           width: widthPercentageToDP('70%'),
           height: heightPercentageToDP('20%'),

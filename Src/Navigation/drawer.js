@@ -208,7 +208,7 @@ function MyDrawer() {
         })}
       />
 
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="Invoice"
         component={Invoice}
         options={({navigation}) => ({
@@ -232,7 +232,7 @@ function MyDrawer() {
             
           },
         })}
-      />
+      /> */}
 
       <Drawer.Screen
         name="Legder"

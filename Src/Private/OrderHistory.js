@@ -45,6 +45,12 @@ const OrderHistory = () => {
     Linking.openURL(url);
   };
 
+  function formatDate(inputDate) {
+    const date = new Date(inputDate);
+    const options = { year: 'numeric', month: 'short', day: '2-digit' };
+    return date.toLocaleDateString('en-GB', options);
+  }
+
   const renderItem = ({ item }) => {
     const date = item.order_date;
     const filteredDate = date.split('-');
@@ -53,56 +59,11 @@ const OrderHistory = () => {
 
     const addUrl = item.product_image;
     return (
-      <View style={styles.container}>
-        <View
-          style={{
-            flexDirection: 'column',
-            width: '70%',
-            height: '60%',
-            justifyContent: 'space-evenly',
-          }}>
-          <View style={styles.textContainer}>
-            <Text style={styles.titleText}>
-              Order Status:
-            </Text>
-
-            <Text style={styles.subTitleText}>{item?.order_status}</Text>
-          </View>
-
-          <View style={styles.textContainer}>
-            <Text style={styles.titleText}>
-              Product Name:
-            </Text>
-
-            <Text style={styles.subTitleText}>{item.product_name}</Text>
-          </View>
-
-
-          <View style={styles.textContainer}>
-            <Text style={styles.titleText}>Quantity:</Text>
-
-            <Text style={styles.subTitleText}>{item.quantity}</Text>
-          </View>
-        </View>
-
-        <View
-          style={{
-            width: '25%',
-            height: '100%',
-
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Image
-            source={{ uri: `https://rrdecor.wooshelf.com${addUrl}` }}
-            style={{
-              width: '100%',
-              height: '90%',
-              borderRadius: wp('2%'),
-            }}
-            resizeMode="cover"
-          />
-        </View>
+      <View style={styles.itemContainer}>
+      <Text style={[styles.contentText,]}>{formatDate(item.order_date)}</Text>
+        <Text style={styles.contentText}>{item?.order_status}</Text>
+        <Text style={[styles.contentText,]}>{item.quantity}</Text>
+        <Text style={[styles.contentText,{fontSize:12}]}>{item.product_name}</Text>
       </View>
     );
   };
@@ -139,12 +100,20 @@ const OrderHistory = () => {
           />
         </View>
       ) : (
+        <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerText}>Date</Text>
+          <Text style={styles.headerText}>Order Status</Text>
+          <Text style={styles.headerText}>Quantity</Text>
+          <Text style={styles.headerText}>Product Name</Text>
+        </View>
         <FlatList
           style={{ marginVertical: hp('2%') }}
           data={orderDataIs}
           renderItem={renderItem}
           keyExtractor={item => item.id}
         />
+      </View>
       )}
     </ScrollView>
   );
@@ -205,5 +174,35 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: wp('5%'),
+    paddingVertical: hp('1%'),
+    backgroundColor: '#EAEAEA',
+  },
+  headerText: {
+    fontSize: wp('3%'),
+    fontWeight: 'bold',
+    flex: 1,
+    textAlign: 'center',
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: wp('5%'),
+    paddingVertical: hp('2%'),
+    borderBottomWidth: 1,
+    borderBottomColor: '#EAEAEA',
+  },
+  contentText: {
+    fontSize: wp('3.5%'),
+    flex: 1,
+    textAlign: 'center',
   },
 });

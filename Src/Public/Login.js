@@ -86,21 +86,21 @@ const Login = () => {
         </Text>
         <View style={styles.inputContainer}>
           <View style={styles.inputIconContainer}>
-            <IconM name="email" size={25} color="#153F5E" />
+            <IconM name="email" size={18} color="#153F5E" />
           </View>
           <TextInput
             style={styles.input}
             onChangeText={text => setEmail(text)}
             value={email}
             placeholder="Email"
-            placeholderTextColor="#000"
+            placeholderTextColor="#999999"
           />
         </View>
         <View style={[styles.inputContainer, styles.inputContainerPassword]}>
           <View style={styles.inputIconContainer}>
             <Image
               source={require('../Assets/Icons/lock.png')}
-              style={{width: 25, height: 25}}
+              style={{width: 18, height: 18}}
               resizeMode="contain"
             />
           </View>
@@ -109,7 +109,7 @@ const Login = () => {
             onChangeText={text => setPassword(text)}
             value={password}
             placeholder="Password"
-            placeholderTextColor="#000"
+            placeholderTextColor="#999999"
             secureTextEntry={true}
           />
         </View>
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
   input: {
     height: 50,
     marginLeft: wp('3%'),
-    color: '#999999',
+    color: '#000',
     // fontFamily: 'Poppins-Regular',
 
     width: '70%',

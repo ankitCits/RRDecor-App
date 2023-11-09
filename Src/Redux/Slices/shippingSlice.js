@@ -44,13 +44,15 @@ export const postShippingDataApi = async params => {
       'Content-Type': 'application/json',
       Authorization: `token ${params.userToken}`,
     },
+
+
     body: JSON.stringify({
-      name: params.name,
-      address: params.address,
-      city: params.city,
+      full_address: params.name + " " +params.address,
+      district: params.city,
       state: params.state,
-      zipcode: params.zipcode,
+      pin_code: params.zipcode,
       country: params.country,
+      gstId:params.gstId
     }),
   });
   const result = await res.json();

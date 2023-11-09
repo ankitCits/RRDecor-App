@@ -40,8 +40,10 @@ export const postOrderDataApi = async params => {
       Authorization: `token ${params.userToken}`,
     },
     body: JSON.stringify({
-      billing_address_id: params.billing_address_id,
-      // shipping_address_id: params.shipping_address_id,
+      mode_of_transport: params.modeOfTransport,
+    shipping_address: params.billing_address_id,
+    refrence:params.refrence,
+    salesman:params.salesman
     }),
   });
   const result = await res.json();

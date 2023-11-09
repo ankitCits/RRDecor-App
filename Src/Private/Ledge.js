@@ -59,7 +59,7 @@ const Ledge = () => {
 
     };
     let ledData =  await dispatch(getLedgerData(params));
-    console.log("^^ LED DATA ^^",ledData?.payload?.response)
+    console.log("^^ LED DATA >>>>>>>>>>>>>>>>^^",ledData)
 
      if (ledData?.payload?.response !== 0) {
       navigation.navigate('LedgerDetail', {
@@ -134,10 +134,10 @@ const Ledge = () => {
         onConfirm={date => {
           setFromOpen(false);
           setFromDate(date);
-          const filteredDate = date.getDate();
-          const filteredMonth = date.getMonth();
+          const filteredDate = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+          const filteredMonth = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
           const filteredYear = date.getFullYear();
-          const set = `${filteredYear}-${filteredMonth + 1}-${filteredDate}`;
+          const set = `${filteredYear}-${filteredMonth}-${filteredDate}`;
           console.log('set is', set);
           setCurrentFromDate(set);
         }}
@@ -152,18 +152,28 @@ const Ledge = () => {
         mode={'date'}
         date={toDate}
         onConfirm={date => {
-          setToOpen(false);
-          setToDate(date);
-          console.log('date is', date);
-
-          const filteredDate = date.getDate();
-          const filteredMonth = date.getMonth();
-          console.log('filtered month is', filteredMonth);
+          setFromOpen(false);
+          setFromDate(date);
+          const filteredDate = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+          const filteredMonth = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
           const filteredYear = date.getFullYear();
-          const set = `${filteredYear}-${filteredMonth + 1}-${filteredDate}`;
+          const set = `${filteredYear}-${filteredMonth}-${filteredDate}`;
           console.log('set is', set);
           setCurrentToDate(set);
         }}
+        // onConfirm={date => {
+        //   setToOpen(false);
+        //   setToDate(date);
+        //   console.log('date is', date);
+
+        //   const filteredDate = date.getDate();
+        //   const filteredMonth = date.getMonth();
+        //   console.log('filtered month is', filteredMonth);
+        //   const filteredYear = date.getFullYear();
+        //   const set = `${filteredYear}-${filteredMonth + 1}-${filteredDate}`;
+        //   console.log('set is', set);
+        //   setCurrentToDate(set);
+        // }}
         onCancel={() => {
           setToOpen(false);
         }}

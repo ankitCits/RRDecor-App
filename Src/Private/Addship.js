@@ -24,6 +24,7 @@ const Addship = ({navigation}) => {
   const [state, setState] = useState('');
   const [zipCode, setZipCode] = useState(0);
   const [country, setCountry] = useState('');
+  const [gstId, setGstId] = useState('');
   const {isLoading, error, shippingAdded} = useSelector(
     state => state.shipping,
   );
@@ -37,6 +38,7 @@ const Addship = ({navigation}) => {
       state: state,
       zipcode: zipCode,
       country: country,
+      gstId:gstId,
       userToken: profileData.auth_token,
     };
     dispatch(postShippingData(params));
@@ -50,7 +52,7 @@ const Addship = ({navigation}) => {
       setFullName('');
       setState('');
       setZipCode('');
-      navigation.navigate('Ship');
+      navigation.navigate('Shop');
       dispatch(clearShippingData());
     }
   }, [handleSubmitAddress]);
@@ -70,7 +72,7 @@ const Addship = ({navigation}) => {
         <Text style={styles.label}>Full name</Text>
         <TextInput
           placeholderTextColor="#000"
-          placeholder="Enter Your Name"
+          // placeholder="Enter Your Name"
           style={styles.input}
           value={fullName}
           onChangeText={text => setFullName(text)}
@@ -81,7 +83,7 @@ const Addship = ({navigation}) => {
         <Text style={styles.label}>Address</Text>
         <TextInput
           placeholderTextColor="#000"
-          placeholder="Enter Your Address"
+          // placeholder="Enter Your Address"
           style={styles.input}
           value={address}
           onChangeText={text => setAddress(text)}
@@ -92,7 +94,7 @@ const Addship = ({navigation}) => {
         <Text style={styles.label}>City</Text>
         <TextInput
           placeholderTextColor="#000"
-          placeholder="Enter Your City"
+          // placeholder="Enter Your City"
           style={styles.input}
           value={city}
           onChangeText={text => setCity(text)}
@@ -103,7 +105,7 @@ const Addship = ({navigation}) => {
         <Text style={styles.label}>State/Province/Region</Text>
         <TextInput
           placeholderTextColor="#000"
-          placeholder="Enter Your State"
+          // placeholder="Enter Your State"
           style={styles.input}
           value={state}
           onChangeText={text => setState(text)}
@@ -114,7 +116,7 @@ const Addship = ({navigation}) => {
         <Text style={styles.label}>Zip Code</Text>
         <TextInput
           placeholderTextColor="#000"
-          placeholder="Enter Your Zipcode"
+          // placeholder="Enter Your Zipcode"
           style={styles.input}
           value={zipCode}
           keyboardType="numeric"
@@ -126,10 +128,21 @@ const Addship = ({navigation}) => {
         <Text style={styles.label}>Country</Text>
         <TextInput
           placeholderTextColor="#000"
-          placeholder="Enter Your Country"
+          // placeholder="Enter Your Country"
           style={styles.input}
           value={country}
           onChangeText={text => setCountry(text)}
+        />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Gst</Text>
+        <TextInput
+          placeholderTextColor="#000"
+          // placeholder="Enter Your Country"
+          style={styles.input}
+          value={gstId}
+          onChangeText={text => setGstId(text)}
         />
       </View>
       {error && (
@@ -191,7 +204,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     
     marginLeft: wp('4%'),
-    marginTop: hp('-1%'),
+    // marginTop: hp('-1%'),
+    padding:10,
+    paddingLeft:0,
+    // backgroundColor:'red'
+
   },
   saveButton: {
     backgroundColor: '#000',

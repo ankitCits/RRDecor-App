@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 14,
-    color: '#999999',
+    color: '#000',
     marginLeft: wp('2%'),
     padding:10
   },
