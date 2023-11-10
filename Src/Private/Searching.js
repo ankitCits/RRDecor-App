@@ -580,7 +580,7 @@ const [value, setValue] = useState(null);
 
             <TextInput
               placeholderTextColor="#000"
-              placeholder={quantity}
+              // placeholder={`${quantity}`}
               style={{
                 color: '#000',
                 
