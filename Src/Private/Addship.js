@@ -19,6 +19,7 @@ import {clearShippingData} from '../Redux/Slices/shippingSlice';
 
 const Addship = ({navigation}) => {
   const [fullName, setFullName] = useState('');
+  const [companyName, setCompanyName] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
@@ -33,6 +34,7 @@ const Addship = ({navigation}) => {
   const handleSubmitAddress = () => {
     const params = {
       name: fullName,
+      companyName:companyName,
       address: address,
       city: city,
       state: state,
@@ -40,6 +42,7 @@ const Addship = ({navigation}) => {
       country: country,
       gstId:gstId,
       userToken: profileData.auth_token,
+
     };
     dispatch(postShippingData(params));
   };
@@ -76,6 +79,17 @@ const Addship = ({navigation}) => {
           style={styles.input}
           value={fullName}
           onChangeText={text => setFullName(text)}
+        />
+      </View>
+
+      <View style={styles.inputContainer}>
+        <Text style={styles.label}>Company Name</Text>
+        <TextInput
+          placeholderTextColor="#000"
+          // placeholder="Enter Your Name"
+          style={styles.input}
+          value={companyName}
+          onChangeText={text => setCompanyName(text)}
         />
       </View>
 

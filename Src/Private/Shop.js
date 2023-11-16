@@ -221,19 +221,9 @@ const Shop = () => {
 
           <View style={styles.dropdownContainer}>
             <Text style={styles.dropdownLabel}>Select Address</Text>
-            {
-              addressFromApi.length == 0 ?
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('Addship')}
-                  style={styles.addAddress}
-                >
-                  <Text
-                    style={{
-                      color: 'blue'
-                    }}
-                  > + Add Address</Text>
-                </TouchableOpacity>
-                :
+            {/* {
+              addressFromApi.length == 0 ? */}
+                {/* : */}
                 <DropDownPicker
                   open={showAddressDropdown}
                   value={selectedAddress}
@@ -244,7 +234,18 @@ const Shop = () => {
                   placeholder={'Select Address.'}
                   dropDownDirection="TOP"
                 />
-            }
+            {/* } */}
+
+            <TouchableOpacity
+                  onPress={() => navigation.navigate('Addship')}
+                  style={styles.addAddress}
+                >
+                  <Text
+                    style={{
+                      color: 'blue'
+                    }}
+                  > + New Add Address</Text>
+                </TouchableOpacity>
 
           </View>
 
@@ -342,7 +343,8 @@ const styles = StyleSheet.create({
     height: 40,
     // backgroundColor:'red',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop:'5%'
   },
   input: {
     height: 50,

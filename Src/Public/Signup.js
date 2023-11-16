@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {
   Image,
+  Linking,
   Platform,
   SafeAreaView,
   ScrollView,
@@ -47,32 +48,26 @@ const Signup = () => {
 
   const handleSignUp = () => {
     if (name === '') {
-      setLocalError('Please Enter your Name');
+      setLocalError('Please enter your full name');
       return;
     } else {
       setLocalError('');
     }
 
     if (re.test(email) === false) {
-      setLocalError('Please Enter Valid Email Address');
-      return;
-    } else {
-      setLocalError('');
-    }
-    if (mobile.length < 10) {
-      setLocalError('Please Enter 10 Digit Mobile Number');
+      setLocalError('Please enter valid email address');
       return;
     } else {
       setLocalError('');
     }
     if (password.length < 6) {
-      setLocalError('Please Enter Minimum 6 Digit Password');
+      setLocalError('Please enter minimum 6 digit password');
       return;
     } else {
       setLocalError('');
     }
     if (password !== confirmPassword) {
-      setLocalError('Passwords Do not match');
+      setLocalError('Passwords do not match');
       return;
     } else {
       setLocalError('');
@@ -134,7 +129,7 @@ const Signup = () => {
               style={styles.input}
               onChangeText={text => setName(text)}
               value={name}
-              placeholder="Name"
+              placeholder="Full Name"
               placeholderTextColor="#999999"
             />
           </View>
@@ -148,19 +143,6 @@ const Signup = () => {
               value={email}
               placeholder="Email"
               placeholderTextColor="#999999"
-            />
-          </View>
-          <View style={[styles.inputContainer, styles.inputContainerPassword]}>
-            <View style={styles.inputIconContainer}>
-              <IconG name="mobile-phone" size={25} />
-            </View>
-            <TextInput
-              style={styles.input}
-              onChangeText={text => setMobile(text)}
-              value={mobile}
-              placeholder="Mobile Number"
-              placeholderTextColor="#999999"
-              keyboardType='number-pad'
             />
           </View>
           <View style={[styles.inputContainer, styles.inputContainerPassword]}>
@@ -195,6 +177,20 @@ const Signup = () => {
               placeholder="Confirm Password"
               placeholderTextColor="#999999"
               secureTextEntry={true}
+            />
+          </View>
+
+          <View style={[styles.inputContainer, styles.inputContainerPassword]}>
+            <View style={styles.inputIconContainer}>
+              <IconG name="mobile-phone" size={25} />
+            </View>
+            <TextInput
+              style={styles.input}
+              onChangeText={text => setMobile(text)}
+              value={mobile}
+              placeholder="Mobile Number ( optional )"
+              placeholderTextColor="#999999"
+              keyboardType='number-pad'
             />
           </View>
           {/* <View style={[styles.inputContainer, styles.inputContainerPassword]}>
@@ -259,18 +255,25 @@ const Signup = () => {
             />
           </View> */}
 
-          {/* <View style={[styles.inputContainer, styles.inputContainerPassword]}>
-            <View style={styles.inputIconContainer}>
-              <IconL name="cash-outline" size={25} />
-            </View>
-            <TextInput
-              style={styles.input}
-              onChangeText={text => setgstType(text)}
-              value={gstType}
-              placeholder="Gst Type"
-              placeholderTextColor="#999999"
-            />
-          </View> */}
+          <TouchableOpacity 
+          onPress={ ()=>{ Linking.openURL('https://www.rrdecor.com/privacy-policy.php')}}
+          style={{
+            margin:'5%',
+            // backgroundColor:'red',
+            width:'100%',
+            height:30,
+            justifyContent:'center',
+            alignItems:'center',
+            marginBottom:'2%'
+          }}
+          
+          >
+              <Text
+              style={{
+                textDecorationLine:'underline'
+              }}
+              >Privacy Policy</Text>
+          </TouchableOpacity>
 
 
 
