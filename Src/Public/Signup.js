@@ -72,6 +72,7 @@ const Signup = () => {
     } else {
       setLocalError('');
     }
+    
 
     const credentials = {
       name: name,
