@@ -148,7 +148,7 @@ const Otp = () => {
             color: '#153F5E',
             
           }}>
-          otp sent to {email}
+          otp sended
         </Text>
         <View
           style={{
