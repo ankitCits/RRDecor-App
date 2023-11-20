@@ -21,13 +21,14 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { useRoute } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProductRollData } from '../Redux/Slices/productRollSlice';
-import { selectToken } from '../Redux/Slices/authSlice';
+import { logout, selectToken } from '../Redux/Slices/authSlice';
 import { getProductRollData } from '../Redux/Slices/productRollSlice';
 import { clearAddedToCart, postCartData } from '../Redux/Slices/cartSlice';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import { selectCartAdded } from '../Redux/Slices/cartSlice';
 
 const Searching = () => {
+
   const navigation = useNavigation();
   const isAddedToCart = useSelector(selectCartAdded);
   const [selectedMode, setSelectedMode] = useState('SM AIR');
@@ -36,10 +37,10 @@ const Searching = () => {
     "SM SURFACE",
     "SMGC",
     "Other"
-]
+  ]
 
-const [open, setOpen] = useState(false);
-const [value, setValue] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
   const route = useRoute();
   const { item } = route.params;
   console.log('item is', item);
@@ -53,7 +54,7 @@ const [value, setValue] = useState(null);
   const productDetailsOnly = productRollDataIs?.item_details
   let productDetailsRoll = productRollDataIs?.roll_no
 
-  
+
   useEffect(() => {
     if (productDetailsRoll?.length) {
       productDetailsRoll = productDetailsRoll?.map(item => {
@@ -92,15 +93,15 @@ const [value, setValue] = useState(null);
     }
 
     var totalUnitPrice = newItems?.reduce((total, item) => {
-    const parsedUnitPrice = parseFloat(item.unit_price);
-    if (!isNaN(parsedUnitPrice)) {
-      return total + parsedUnitPrice;
-    }
-    return total;
-  }, 0);
+      const parsedUnitPrice = parseFloat(item.unit_price);
+      if (!isNaN(parsedUnitPrice)) {
+        return total + parsedUnitPrice;
+      }
+      return total;
+    }, 0);
 
-  console.log(">>>>>>>",totalUnitPrice)
-  setQuantity(totalUnitPrice)
+    console.log(">>>>>>>", totalUnitPrice)
+    setQuantity(totalUnitPrice)
   };
 
 
@@ -313,19 +314,26 @@ const [value, setValue] = useState(null);
 
   const { isLoading, error } = useSelector(state => state.productRoll);
 
+
+  const [error2, setError2] = useState("")
   const handleAddToCart = () => {
-    // console.log("^^^productDetailsOnly",productDetailsOnly)
-    // return
-    const params = {
-      data: {
-        product_id: productDetailsOnly[0].id,
-        // roll_id: productRollDataIs[selectedItem].id,
-        quantity: quantity,
-      },
-      userToken: profileData.auth_token,
-    };
-    console.log('params is', params);
-    dispatch(postCartData(params));
+    if (profileData?.userData?.email == "help@rrdecor.com") {
+      setError2('Click here For Login OR Signup...')
+      return
+    }else{
+
+      const params = {
+        data: {
+          product_id: productDetailsOnly[0].id,
+          // roll_id: productRollDataIs[selectedItem].id,
+          quantity: quantity,
+        },
+        userToken: profileData.auth_token,
+      };
+      console.log('params is', params);
+      dispatch(postCartData(params));
+    }
+
 
   };
 
@@ -367,10 +375,11 @@ const [value, setValue] = useState(null);
     }
   };
 
+
   console.log("^^ items>> ^^", productDetailsRoll)
 
   return (
-    <ScrollView style={{backgroundColor:'#fff'}}>
+    <ScrollView style={{ backgroundColor: '#fff' }}>
       <View style={{ backgroundColor: '#fff', flex: 1 }}>
         <Spinner visible={isLoading} />
         <Spinner visible={isCartLoading} />
@@ -578,24 +587,25 @@ const [value, setValue] = useState(null);
                {quantity}
               </Text> */}
 
-            <TextInput
-              placeholderTextColor="#000"
-              // placeholder={`${quantity}`}
-              style={{
-                color: '#000',
-                
-                fontSize: wp('4%'),
-                width: '60%',
-              }}
-              value={quantity}
-              // onChangeText={text => {
-              //   const numericValue = text.replace(/[^0-9]/g, '');
 
-              //   setQuantity(numericValue);
-              // }}
-              onChangeText={handleQuantityChange}
-              keyboardType="numeric"
-            />
+              <TextInput
+                placeholderTextColor="#000"
+                placeholder={quantity}
+                style={{
+                  color: '#000',
+
+                  fontSize: wp('4%'),
+                  width: '60%',
+                }}
+                value={quantity}
+                // onChangeText={text => {
+                //   const numericValue = text.replace(/[^0-9]/g, '');
+
+                //   setQuantity(numericValue);
+                // }}
+                onChangeText={handleQuantityChange}
+                keyboardType="numeric"
+              />
             </View>
             {CartError && (
               <Text
@@ -608,6 +618,25 @@ const [value, setValue] = useState(null);
                 }}>
                 {CartError}
               </Text>
+            )}
+
+
+            {error2 != "" && (
+              <TouchableOpacity
+                onPress={() => dispatch(logout())}
+              >
+                <Text
+                  style={{
+                    color: '#153F5E',
+
+                    fontSize: wp('3%'),
+                    textAlign: 'center',
+                    marginTop: hp('2%'),
+                    // textDecorationLine:'underline'
+                  }}>
+                  {error2}
+                </Text>
+              </TouchableOpacity>
             )}
 
 
@@ -667,10 +696,10 @@ const [value, setValue] = useState(null);
         )}
       </View>
       <View
-      style={{width:'90%',alignSelf:'center',marginBottom:'5%'}}
+        style={{ width: '90%', alignSelf: 'center', marginBottom: '5%' }}
       >
-      <Text>
-Please call our sales team to check physical quantity, if stock does not show here.</Text>
+        <Text>
+          Please call our sales team to check physical quantity, if stock does not show here.</Text>
       </View>
     </ScrollView>
   );

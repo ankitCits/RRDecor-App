@@ -21,6 +21,7 @@ import Spinner from 'react-native-loading-spinner-overlay/lib';
 import {login, resetLoginMessage, sendOtp} from '../Redux/Slices/authSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -63,6 +64,17 @@ const Login = () => {
     // Clean up the listener when the component unmounts
     return unsubscribe;
   }, [navigation]);
+
+
+
+
+  const skipMethod = async() => {
+    const credentials = {
+      email: 'help@rrdecor.com',
+      password: '123456',
+    };
+    dispatch(login(credentials));
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -133,6 +145,15 @@ const Login = () => {
           <Text style={styles.signupText}>
             Don't have an account?{' '}
             <Text style={styles.signupLink}>Sign Up</Text>
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={()=>skipMethod()}>
+          <Text style={styles.signupText}>
+            <Text style={[styles.signupLink,{
+
+    textDecorationLine:'underline',
+            }]}>  SKIP  </Text>
           </Text>
         </TouchableOpacity>
       </View>

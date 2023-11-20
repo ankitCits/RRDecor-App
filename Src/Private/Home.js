@@ -204,16 +204,15 @@ const Home = () => {
 
 
 
+
   console.log("^^ collectionData ^^",collectionData)
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ flex: 1,backgroundColor:'#fff' }}>
 
       <StatusBar
-        backgroundColor="#fff"
+        backgroundColor="white"
         barStyle={'dark-content'}
-      // showHideTransition={statusBarTransition}
-      // hidden={hidden}
       />
       {/* <Spinner visible={isLoading || isBannerLoading} /> */}
       <ScrollView
@@ -222,7 +221,7 @@ const Home = () => {
         }
 
         showsVerticalScrollIndicator={false}
-        style={{ backgroundColor: '#fff' }}>
+        style={{ backgroundColor: '#fff' ,marginTop:'11%'}}>
         <View
           style={{
             height: hp('7%'),
@@ -407,7 +406,7 @@ const Home = () => {
         />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
