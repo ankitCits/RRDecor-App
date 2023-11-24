@@ -20,11 +20,13 @@ import SwiperFlatList from 'react-native-swiper-flatlist';
 import { ScrollView } from 'react-native-virtualized-view';
 import { getCollectionData } from '../Redux/Slices/collectionSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectToken } from '../Redux/Slices/authSlice';
+import { logout, selectToken } from '../Redux/Slices/authSlice';
 import { BASE_URL } from '../conifg';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import { getBannerData, selectBannerData } from '../Redux/Slices/bannerSlice';
 const Home = () => {
+  const [windowWidth, setWindowWidth] = useState(Dimensions.get('window').width);
+  const [windowHeight, setWindowHeight] = useState(Dimensions.get('window').height);
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const profileData = useSelector(selectToken);
@@ -80,7 +82,7 @@ const Home = () => {
 
       image: require('../Assets/Image/EssentialsLogo.png'),
       width: 120,
-      height:30.4
+      height: 30.4
       // image: require('../Assets/Image/VersaceLogo.png'),
       // width: 78.13,
     },
@@ -88,7 +90,7 @@ const Home = () => {
       key: '1',
       image: require('../Assets/Image/ArezzoLogo.png'),
       height: 48,
-      width:80
+      width: 80
     },
 
 
@@ -111,7 +113,7 @@ const Home = () => {
     {
       key: '3',
       image: require('../Assets/Image/PersanLogo.png'),
-      height:52.95,
+      height: 52.95,
       width: 75
     },
     {
@@ -141,7 +143,7 @@ const Home = () => {
 
   const renderItemLogo = ({ item }) => {
     return (
-      <View style={{ padding: 5, marginLeft: 10,justifyContent:'center',alignSelf:'center' }}>
+      <View style={{ padding: 5, marginLeft: 10, justifyContent: 'center', alignSelf: 'center' }}>
         <Image
           source={item.image}
           style={{ height: item.height, width: item.width, }}
@@ -205,10 +207,11 @@ const Home = () => {
 
 
 
-  console.log("^^ collectionData ^^",collectionData)
+  console.log("^^ collectionData ^^", collectionData)
+  
 
   return (
-    <View style={{ flex: 1,backgroundColor:'#fff' }}>
+    <View style={{ flex: 1, backgroundColor: '#fff' }}>
 
       <StatusBar
         backgroundColor="white"
@@ -221,7 +224,7 @@ const Home = () => {
         }
 
         showsVerticalScrollIndicator={false}
-        style={{ backgroundColor: '#fff' ,marginTop:'11%'}}>
+        style={{ backgroundColor: '#fff', marginTop: '11%' }}>
         <View
           style={{
             height: hp('7%'),
@@ -270,18 +273,42 @@ const Home = () => {
             <TouchableOpacity
 
               onPress={() => navigation.navigate('Shop')}>
-              <Image
-                source={require('../Assets/Icons/store.png')}
-                style={{ marginRight: wp('3%') }}
-                resizeMode="contain"
-              />
+              {profileData?.userData?.email != "help@rrdecor.com" &&
+                <Image
+                  source={require('../Assets/Icons/store.png')}
+                  style={{ marginRight: wp('3%') }}
+                  resizeMode="contain"
+                />
+              }
+
             </TouchableOpacity>
+            {profileData?.userData?.email != "help@rrdecor.com" ?
+            
             <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
-              <Image
-                source={require('../Assets/Icons/user.png')}
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
+            <Image
+              source={require('../Assets/Icons/user.png')}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+
+          :
+          <TouchableOpacity 
+          style={{
+            width: windowWidth * 0.07,
+            // backgroundColor: '#000',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: windowWidth * 0.07,
+            borderRadius: windowWidth * 0.02,
+          }}
+          onPress={()=>dispatch(logout())}>
+           <Image
+              source={require('../Assets/Icons/user.png')}
+              resizeMode="contain"
+            />
+        </TouchableOpacity>
+            }
+
           </View>
         </View>
 
@@ -311,14 +338,14 @@ const Home = () => {
             onChangeIndex={({ index }) => setCurrentIndex(index)}
           /> */}
 
-       <View
-       style={[styles.logoInner,]}
-       >
-       <Image 
-         source={require('../Assets/Image/RRDecorLogo.png')}
-         style={{height:14.93,width:120,}}
-         />
-       </View>
+          <View
+            style={[styles.logoInner,]}
+          >
+            <Image
+              source={require('../Assets/Image/RRDecorLogo.png')}
+              style={{ height: 14.93, width: 120, }}
+            />
+          </View>
 
           <FlatList
             ref={flatListRef}
@@ -338,39 +365,39 @@ const Home = () => {
 
 
           <View
-           style={styles.logoInner}
+            style={styles.logoInner}
           >
-          <FlatList
-            data={data}
-            renderItem={renderItemLogo}
-            keyExtractor={(item) => item.key}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
+            <FlatList
+              data={data}
+              renderItem={renderItemLogo}
+              keyExtractor={(item) => item.key}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
           </View>
 
           <View
-          style={styles.logoInner}
+            style={styles.logoInner}
           >
-          <FlatList
-            data={data2}
-            renderItem={renderItemLogo}
-            keyExtractor={(item) => item.key}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          />
+            <FlatList
+              data={data2}
+              renderItem={renderItemLogo}
+              keyExtractor={(item) => item.key}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            />
           </View>
 
 
 
-       <View
-       style={[styles.logoInner,]}
-       >
-       <Image 
-         source={require('../Assets/Image/Sketch23Logo.png')}
-         style={{height: 47.84,width:120,}}
-         />
-       </View>
+          <View
+            style={[styles.logoInner,]}
+          >
+            <Image
+              source={require('../Assets/Image/Sketch23Logo.png')}
+              style={{ height: 47.84, width: 120, }}
+            />
+          </View>
 
         </View>
 
@@ -384,26 +411,27 @@ const Home = () => {
             fontWeight: '500',
             paddingLeft: wp('4%'),
             paddingTop: hp('1%'),
-            textAlign:'center'
+            textAlign: 'center'
 
           }}>
           Collections
         </Text>
 
         <View
-        style={{
-          flex:1,
-          // backgroundColor:'red',
-          alignItems:'center'
-        }}
+          style={{
+            flex: 1,
+            // backgroundColor:'red',
+            alignItems: 'center',
+            marginBottom:'8%'
+          }}
         >
-        <FlatList
-          data={collectionData}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          numColumns={2}
-          contentContainerStyle={styles.flatListContainer}
-        />
+          <FlatList
+            data={collectionData}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            numColumns={2}
+            contentContainerStyle={styles.flatListContainer}
+          />
         </View>
       </ScrollView>
     </View>
@@ -437,8 +465,8 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // alignItems: 'center'
     justifyContent: 'space-evenly',
-    alignItems:'center',
-    marginBottom:0,
+    alignItems: 'center',
+    marginBottom: 0,
     // alignItems:'center'
   },
   image1: {
@@ -456,8 +484,8 @@ const styles = StyleSheet.create({
     marginLeft: wp('2%'),
     fontSize: wp('3%'),
     // backgroundColor:'red',
-    width:'75%',
-    textAlign:'center'
+    width: '75%',
+    textAlign: 'center'
   },
   paginationContainer: {
     position: 'absolute',
@@ -487,11 +515,11 @@ const styles = StyleSheet.create({
     // marginLeft:10
     // backgroundColor: '#ecf0f1',
   },
-  logoInner:{
-    padding:15,
-    justifyContent:'center',
-    alignItems:'center',
-  // backgroundColor:'red'
+  logoInner: {
+    padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor:'red'
   }
   // image: {
   //   width: 50,
