@@ -587,6 +587,7 @@ const Searching = () => {
                {quantity}
               </Text> */}
 
+
               <TextInput
                 placeholderTextColor="#000"
                 placeholder={quantity}
