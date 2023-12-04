@@ -55,7 +55,7 @@ const Product = () => {
     const addUrl = item.image;
 
     return (
-      <TouchableOpacity style={styles.itemContainer}>
+      <View style={styles.itemContainer}>
         <Image
           source={{
             uri: `https://rrdecor.wooshelf.com${addUrl}`,
@@ -63,7 +63,7 @@ const Product = () => {
           style={styles.image1}
         />
         <Text style={styles.text}>{item.product_name}</Text>
-      </TouchableOpacity>
+      </View>
     );
   };
   return (
