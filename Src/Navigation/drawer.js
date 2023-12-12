@@ -55,7 +55,10 @@ function MyDrawer() {
       initialRouteName="Home"
       drawerContent={props => <CustomDrawers {...props} />}
       screenOptions={{ headerShown: false }}>
-      <Drawer.Screen
+
+        {profileData?.userData?.email != "help@rrdecor.com" && 
+        
+        <Drawer.Screen
         name="Profile"
         component={Profile}
         options={({ navigation }) => ({
@@ -112,6 +115,8 @@ function MyDrawer() {
           headerTitleAlign: 'center',
         })}
       />
+        }
+
       <Drawer.Screen
         name="Home"
         component={Home}
@@ -154,31 +159,36 @@ function MyDrawer() {
         })}
       />
 
+      {profileData?.userData?.email != "help@rrdecor.com" &&
+      
       <Drawer.Screen
-        name="Order History"
-        component={OrderHistory}
-        options={({ navigation }) => ({
-          headerShown: true,
-          drawerActiveBackgroundColor: '#FFFF',
-          drawerActiveTintColor: '#000000',
-          drawerInactiveTintColor: '#000000',
+      name="Order History"
+      component={OrderHistory}
+      options={({ navigation }) => ({
+        headerShown: true,
+        drawerActiveBackgroundColor: '#FFFF',
+        drawerActiveTintColor: '#000000',
+        drawerInactiveTintColor: '#000000',
 
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-              style={{ paddingLeft: 10, backgroundColor: '#fff', height: '100%', width: 50, justifyContent: 'center' }}>
-              <IconG name="chevron-left" size={30} color="black" />
-            </TouchableOpacity>
-          ),
-          headerTitleAlign: 'center',
-          drawerLabelStyle: {
+        headerLeft: () => (
+          <TouchableOpacity
+            onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+            style={{ paddingLeft: 10, backgroundColor: '#fff', height: '100%', width: 50, justifyContent: 'center' }}>
+            <IconG name="chevron-left" size={30} color="black" />
+          </TouchableOpacity>
+        ),
+        headerTitleAlign: 'center',
+        drawerLabelStyle: {
 
-          },
-          headerTitleStyle: {
+        },
+        headerTitleStyle: {
 
-          },
-        })}
-      />
+        },
+      })}
+    />
+      }
+
+
 
       <Drawer.Screen
         name="Collection"
@@ -234,33 +244,38 @@ function MyDrawer() {
         })}
       /> */}
 
+      {profileData?.userData?.email != "help@rrdecor.com" &&
+      
       <Drawer.Screen
-        name="Legder"
-        component={Ledge}
-        options={({navigation}) => ({
-          headerShown: true,
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-              style={{paddingLeft: 10,backgroundColor:'#fff',height:'100%',width:50,justifyContent:'center'}}>
-              <IconG name="chevron-left" size={30} color="black" />
-            </TouchableOpacity>
-          ),
-          headerTitle: 'Ledger',
-          headerTitleStyle: {textAlign: 'center', fontSize: 17},
-          drawerActiveBackgroundColor: '#FFFF',
-          drawerActiveTintColor: '#000000',
-          drawerInactiveTintColor: '#000000',
+      name="Legder"
+      component={Ledge}
+      options={({navigation}) => ({
+        headerShown: true,
+        headerLeft: () => (
+          <TouchableOpacity
+            onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+            style={{paddingLeft: 10,backgroundColor:'#fff',height:'100%',width:50,justifyContent:'center'}}>
+            <IconG name="chevron-left" size={30} color="black" />
+          </TouchableOpacity>
+        ),
+        headerTitle: 'Ledger',
+        headerTitleStyle: {textAlign: 'center', fontSize: 17},
+        drawerActiveBackgroundColor: '#FFFF',
+        drawerActiveTintColor: '#000000',
+        drawerInactiveTintColor: '#000000',
 
-          headerTitleAlign: 'center',
-          drawerLabelStyle: {
-            
-          },
-          headerTitleStyle: {
-            
-          },
-        })}
-      />
+        headerTitleAlign: 'center',
+        drawerLabelStyle: {
+          
+        },
+        headerTitleStyle: {
+          
+        },
+      })}
+    />
+      }
+
+
 
       <Drawer.Screen
         name="Contact"
@@ -344,7 +359,7 @@ function MyDrawer() {
         })}
       />
 
-<Drawer.Screen
+{/* <Drawer.Screen
         name="About"
         component={About}
         options={({ navigation }) => ({
@@ -368,7 +383,7 @@ function MyDrawer() {
 
           },
         })}
-      />
+      /> */}
 
 {/* <Drawer.Screen
   name="Logout"

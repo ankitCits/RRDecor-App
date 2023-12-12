@@ -97,7 +97,7 @@ const Signup = () => {
   useEffect(() => {
     if (sentOtp === true) {
       navigation.navigate('Otp', {
-        email: mobile,
+        email: email,
       });
     }
   }, [handleSignUp]);

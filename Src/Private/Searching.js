@@ -318,7 +318,7 @@ const Searching = () => {
   const [error2, setError2] = useState("")
   const handleAddToCart = () => {
     if (profileData?.userData?.email == "help@rrdecor.com") {
-      setError2('Click here For Login OR Signup...')
+      dispatch(logout())
       return
     }else{
 
@@ -627,7 +627,7 @@ const Searching = () => {
               >
                 <Text
                   style={{
-                    color: '#153F5E',
+                    color: '',
 
                     fontSize: wp('3%'),
                     textAlign: 'center',

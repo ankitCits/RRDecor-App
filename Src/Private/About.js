@@ -1,10 +1,9 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const About = () => {
   return (

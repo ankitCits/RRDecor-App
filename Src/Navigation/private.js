@@ -15,6 +15,9 @@ import Sucess from '../Private/Sucess';
 import Shopcart from '../Private/Shopcart';
 import LedgerDetail from '../Private/LedgerDetail';
 import CategoriesNext from '../Private/CategoriesNext';
+import TermsScreen from '../Private/Terms';
+import AboutScreen from '../Private/About';
+import PrivacyScreen from '../Private/Privacy';
 function PrivateStack() {
   const Stack = createNativeStackNavigator();
 
@@ -253,6 +256,78 @@ function PrivateStack() {
           },
         }}
       />
+
+<Stack.Screen
+        name="AboutScreen"
+        component={AboutScreen}
+        options={{
+          headerBackTitleVisible: false, 
+          headerShown: true,
+          headerBackImage: () => (
+            <IconG name="chevron-left" color="grey" size={26} />
+          ),
+          headerTitle: 'About Us',
+          headerTitleAlign: 'center',
+          headerTintColor: '#000',
+          headerShown: true,
+
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTitleStyle: {
+            
+          },
+        }}
+      />
+
+
+<Stack.Screen
+        name="PrivacyScreen"
+        component={PrivacyScreen}
+        options={{
+          headerBackTitleVisible: false, 
+          headerShown: true,
+          headerBackImage: () => (
+            <IconG name="chevron-left" color="grey" size={26} />
+          ),
+          headerTitle: 'Privacy and Policy',
+          headerTitleAlign: 'center',
+          headerTintColor: '#000',
+          headerShown: true,
+
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTitleStyle: {
+            
+          },
+        }}
+      />
+
+<Stack.Screen
+        name="TermsScreen"
+        component={TermsScreen}
+        options={{
+          headerBackTitleVisible: false, 
+          headerShown: true,
+          headerBackImage: () => (
+            <IconG name="chevron-left" color="grey" size={26} />
+          ),
+          headerTitle: 'Terms and Conditions',
+          headerTitleAlign: 'center',
+          headerTintColor: '#000',
+          headerShown: true,
+
+          headerStyle: {
+            backgroundColor: '#fff',
+          },
+          headerTitleStyle: {
+            
+          },
+        }}
+      />
+
+      
     </Stack.Navigator>
   );
 }

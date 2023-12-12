@@ -294,7 +294,7 @@ const authSlice = createSlice({
       state.error = action.payload;
       if (action.payload.status_code === 400) {
         console.log('Action payooad', action.payload);
-        state.error = action.payload.result;
+        state.error = action.payload.result || action.payload.response;
         state.isLoading = false;
         state.sentOtp = false;
       }

@@ -9,18 +9,18 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import IconM from 'react-native-vector-icons/Zocial';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import Spinner from 'react-native-loading-spinner-overlay/lib';
-import {login, resetLoginMessage, sendOtp} from '../Redux/Slices/authSlice';
-import {useDispatch, useSelector} from 'react-redux';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { login, resetLoginMessage, sendOtp } from '../Redux/Slices/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
@@ -28,7 +28,7 @@ const Login = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {isLoading, error, sentOtp} = useSelector(state => state.auth);
+  const { isLoading, error, sentOtp } = useSelector(state => state.auth);
   const [localError, setLocalError] = useState('');
   var re = /\S+@\S+\.\S+/;
   const handleLogin = () => {
@@ -68,7 +68,7 @@ const Login = () => {
 
 
 
-  const skipMethod = async() => {
+  const skipMethod = async () => {
     const credentials = {
       email: 'help@rrdecor.com',
       password: '123456',
@@ -83,16 +83,16 @@ const Login = () => {
       <View style={styles.contentContainer}>
         <Image
           source={require('../Assets/Image/logo3x.png')}
-          style={{width: wp('70%'), height: hp('10%')}}
+          style={{ width: wp('70%'), height: hp('10%') }}
           resizeMode="contain"
         />
         <Text
           style={{
-            
+
             fontSize: wp('7%'),
             color: '#000',
             marginVertical: hp('2%'),
-            fontWeight:'600'
+            fontWeight: '600'
           }}>
           Login
         </Text>
@@ -112,7 +112,7 @@ const Login = () => {
           <View style={styles.inputIconContainer}>
             <Image
               source={require('../Assets/Icons/lock.png')}
-              style={{width: 18, height: 18}}
+              style={{ width: 18, height: 18 }}
               resizeMode="contain"
             />
           </View>
@@ -148,11 +148,11 @@ const Login = () => {
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={()=>skipMethod()}>
+        <TouchableOpacity onPress={() => skipMethod()}>
           <Text style={styles.signupText}>
-            <Text style={[styles.signupLink,{
+            <Text style={[styles.signupLink, {
 
-    textDecorationLine:'underline',
+              textDecorationLine: 'underline',
             }]}>  SKIP  </Text>
           </Text>
         </TouchableOpacity>
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         shadowColor: '#000',
-        shadowOffset: {width: 0, height: 0},
+        shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.05,
         shadowRadius: 2,
       },
