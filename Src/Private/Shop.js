@@ -63,7 +63,7 @@ const Shop = () => {
 
   const convertToDropdownFormatAdd = (array) => {
     const dropdownArray = array.map((item) => {
-      const label = `${item.full_address}, ${item.district}, ${item.state}, ${item.pin_code}, Gst: (${item?.gstId})`;
+      const label = `${item.full_address}, ${item.district}, ${item.state}, ${item.pin_code}, ${item?.mobileNo}, Gst: (${item?.gstId})`;
       return { label: label, value: item.id };
     });
     return dropdownArray;

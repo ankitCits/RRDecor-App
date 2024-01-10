@@ -52,7 +52,8 @@ export const postShippingDataApi = async params => {
       state: params.state,
       pin_code: params.zipcode,
       country: params.country,
-      gstId:params.gstId
+      gstId:params.gstId,
+      mobileNo:params.mobileNo
     }),
   });
   const result = await res.json();
