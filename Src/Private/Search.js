@@ -144,6 +144,7 @@ const Search = () => {
                   fontSize: wp('3%'),
                   width: '100%',
                   textAlignVertical: 'center',
+                  color:'black'
                 }}>
                 {item?.item_description}
               </Text>

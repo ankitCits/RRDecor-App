@@ -326,7 +326,7 @@ const Searching = () => {
         data: {
           product_id: productDetailsOnly[0].id,
           // roll_id: productRollDataIs[selectedItem].id,
-          quantity: quantity,
+          quantity: parseInt(quantity),
         },
         userToken: profileData.auth_token,
       };
@@ -369,7 +369,7 @@ const Searching = () => {
 
   const handleQuantityChange = text => {
     // Validate the input if needed
-    const parsedQuantity = parseInt(text, 10);
+    const parsedQuantity = parseInt(text);
     if (!isNaN(parsedQuantity)) {
       setQuantity(parsedQuantity);
     }
@@ -590,20 +590,20 @@ const Searching = () => {
 
               <TextInput
                 placeholderTextColor="#000"
-                placeholder={quantity}
+                // placeholder={`${quantity}`}
                 style={{
                   color: '#000',
 
                   fontSize: wp('4%'),
                   width: '60%',
                 }}
-                value={quantity}
+                value={`${quantity}`}
                 // onChangeText={text => {
                 //   const numericValue = text.replace(/[^0-9]/g, '');
 
                 //   setQuantity(numericValue);
                 // }}
-                onChangeText={handleQuantityChange}
+                onChangeText={(i)=>setQuantity(i)}
                 keyboardType="numeric"
               />
             </View>

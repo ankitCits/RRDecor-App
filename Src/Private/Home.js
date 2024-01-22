@@ -224,7 +224,7 @@ const Home = () => {
         }
 
         showsVerticalScrollIndicator={false}
-        style={{ backgroundColor: '#fff', marginTop: '11%' }}>
+        style={{ backgroundColor: '#fff', marginTop: '0%' }}>
         <View
           style={{
             height: hp('7%'),

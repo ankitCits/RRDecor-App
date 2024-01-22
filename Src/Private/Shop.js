@@ -283,7 +283,7 @@ const Shop = () => {
             <TextInput
               style={styles.input}
               onChangeText={text => setRefrence(text)}
-              value={refrence}
+              value={`${refrence}`}
               placeholder="Order Refrence"
               placeholderTextColor="#999999"
             />
