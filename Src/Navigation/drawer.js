@@ -83,7 +83,8 @@ function MyDrawer() {
                 <Text
                   style={{
                     color: '#000',
-                    fontSize: 18,
+                    fontSize: 16,
+                    fontWeight:'600'
 
 
                   }}>
@@ -93,7 +94,7 @@ function MyDrawer() {
                   <Text
                     style={{
                       color: '#707070',
-                      fontSize: 13,
+                      fontSize: 10,
 
 
                     }}>

@@ -6,6 +6,7 @@ import {
   View,
   FlatList,
   TextInput,
+  KeyboardAvoidingView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
@@ -170,10 +171,11 @@ const Shop = () => {
     }
   };
 
+
   console.log("CCCCC>>", selectedAddress, selectedTransportMode)
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+    <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#fff' }} behavior="padding">
       <Spinner visible={isOrderLoading} />
       {cartData.length === 0 ? (
         <View
@@ -318,7 +320,7 @@ const Shop = () => {
         </>
       )}
 
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

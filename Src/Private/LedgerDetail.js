@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList,Image } from 'react-native';
 import React from 'react';
 import { useRoute } from '@react-navigation/native';
 import LedgerItem from '../components/molecules/LedgerItem';
@@ -14,17 +14,17 @@ const LedgerDetail = () => {
 
   function convertToDecimal(number) {
     return Number(number).toFixed(2);
-}
+  }
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      {data?.length !== 0 && (
+      {data?.length !== 0 ? (
         <>
           <View
             style={styles.container}
           >
             <Text
               style={{
-                color: "#000",
+                color: "#fff",
                 fontSize: 14
               }}
             >Opening Balance : {convertToDecimal(data[0]?.total_balance)}</Text>
@@ -33,13 +33,30 @@ const LedgerDetail = () => {
           <FlatList
             style={{ marginVertical: hp('1%') }}
             keyExtractor={item => item.id}
-            data={data}
+            data={data.slice().reverse()}
             renderItem={({ item }) => {
               return <LedgerItem item={item} />;
             }}
           />
         </>
-      )}
+      )
+        :
+        <View
+          style={{
+            flex: 1,
+            // justifyContent:'center',
+            alignItems: 'center',
+            alignSelf: 'center',
+            marginTop: '50%'
+          }}
+        >
+          <Image
+            source={require('../Assets/Image/norecordfound.png')}
+            style={{ width: 120, height: 120 }}
+            resizeMode="contain"
+          />
+        </View>
+      }
     </View>
   );
 };
@@ -49,7 +66,7 @@ export default LedgerDetail;
 const styles = StyleSheet.create({
   container: {
     width: wp('90%'),
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
     height: hp('5%'),
     borderRadius: wp('1%'),
     alignSelf: 'center',

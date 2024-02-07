@@ -8,6 +8,7 @@ import {
   View,
   ScrollView,
   Keyboard,
+  KeyboardAvoidingView,
   // Picker
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
@@ -400,7 +401,7 @@ const Searching = () => {
             />
           </View>
         ) : (
-          <>
+          <KeyboardAvoidingView style={{ flex: 1, backgroundColor: '#fff' }} behavior="padding">
             <View
               style={{
                 width: wp('94%'),
@@ -596,6 +597,8 @@ const Searching = () => {
 
                   fontSize: wp('4%'),
                   width: '60%',
+                  // backgroundColor:'red',
+                  height:'100%'
                 }}
                 value={quantity}
                 // onChangeText={text => {
@@ -692,11 +695,11 @@ const Searching = () => {
           closeOnTouchOutside={false}
           />
           </View> */}
-          </>
+          </KeyboardAvoidingView>
         )}
       </View>
       <View
-        style={{ width: '90%', alignSelf: 'center', marginBottom: '5%' }}
+        style={{ width: '90%', alignSelf: 'center', marginBottom: '90%' }}
       >
         <Text>
           Please call our sales team to check physical quantity, if stock does not show here.</Text>

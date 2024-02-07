@@ -90,17 +90,6 @@ const Addship = ({ navigation }) => {
         </View>
 
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Company Name</Text>
-          <TextInput
-            placeholderTextColor="#000"
-            // placeholder="Enter Your Name"
-            style={styles.input}
-            value={companyName}
-            onChangeText={text => setCompanyName(text)}
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
           <Text style={styles.label}>Mobile Number</Text>
           <TextInput
             placeholderTextColor="#000"
@@ -109,6 +98,16 @@ const Addship = ({ navigation }) => {
             value={mobileNo}
             keyboardType='number-pad'
             onChangeText={text => setMobileNo(text)}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Company Name</Text>
+          <TextInput
+            placeholderTextColor="#000"
+            // placeholder="Enter Your Name"
+            style={styles.input}
+            value={companyName}
+            onChangeText={text => setCompanyName(text)}
           />
         </View>
 
@@ -144,6 +143,16 @@ const Addship = ({ navigation }) => {
             onChangeText={text => setState(text)}
           />
         </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Country</Text>
+          <TextInput
+            placeholderTextColor="#000"
+            // placeholder="Enter Your Country"
+            style={styles.input}
+            value={country}
+            onChangeText={text => setCountry(text)}
+          />
+        </View>
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Zip Code</Text>
@@ -157,16 +166,7 @@ const Addship = ({ navigation }) => {
           />
         </View>
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Country</Text>
-          <TextInput
-            placeholderTextColor="#000"
-            // placeholder="Enter Your Country"
-            style={styles.input}
-            value={country}
-            onChangeText={text => setCountry(text)}
-          />
-        </View>
+
 
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Gst</Text>

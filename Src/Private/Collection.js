@@ -22,27 +22,7 @@ const Collection = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [disData, setDisData] = useState([])
   const [loader, setLoader] = useState(true)
-  const data = [
-    {id: '1', image: require('../Assets/Image/dec10.png'), text: 'Bonita'},
-    {
-      id: '2',
-      image: require('../Assets/Image/dec4.png'),
-      text: 'Bonita Velvet',
-    },
-    {id: '3', image: require('../Assets/Image/dec9.png'), text: 'Lavinia'},
-    {
-      id: '4',
-      image: require('../Assets/Image/dec1.png'),
-      text: 'Lavinia Panel',
-    },
-    {id: '5', image: require('../Assets/Image/dec7.png'), text: 'Euphoria'},
-    {
-      id: '6',
-      image: require('../Assets/Image/dec11.png'),
-      text: 'Euphoria Velvet',
-    },
-    // Add more items as needed
-  ];
+
   const renderItem = ({item}) => (
     <TouchableOpacity style={styles.itemContainer}>
       <Image source={{uri:`https://rrdecor.wooshelf.com${item.image}`}} style={styles.image1} />
