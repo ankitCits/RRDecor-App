@@ -71,6 +71,8 @@ const Ledge = () => {
 
   const LedgerDataIs = useSelector(selectLedgerData);
 
+
+  
   useEffect(() => {
     // Listen for navigation changes
     const unsubscribe = navigation.addListener('blur', () => {
@@ -152,7 +154,7 @@ const Ledge = () => {
         mode={'date'}
         date={toDate}
         onConfirm={date => {
-          setFromOpen(false);
+          setToOpen(false);
           setFromDate(date);
           const filteredDate = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
           const filteredMonth = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);

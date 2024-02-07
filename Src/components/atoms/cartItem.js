@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Alert, ActivityIndicator } from 'react-native';
 import React, { useState } from 'react';
 import {
   widthPercentageToDP as wp,
@@ -17,7 +17,7 @@ const CartItem = ({ item }) => {
   const dispatch = useDispatch();
 
   const profileData = useSelector(selectToken);
-
+  const [loader, setLoader] = useState(false)
   const [isChecked, setChecked] = useState(false);
   const handleCheck = () => {
     setChecked(!isChecked);
@@ -25,7 +25,7 @@ const CartItem = ({ item }) => {
 
   const handleDeleteCartItem = () => {
     Alert.alert(
-      'Remove To Card',
+      'DELETE FROM CART',
       `${item?.item_description}`,
       [
         {
@@ -34,15 +34,23 @@ const CartItem = ({ item }) => {
         },
         {
           text: 'Continue',
-          onPress: () => {
+          onPress: async() => {
+            setLoader(true)
             dispatch(removeSpecificItem(item));
             console.log('item id is', item.id);
             const params = {
               userToken: profileData.auth_token,
               id: item.id,
             };
-            dispatch(removeCartItem(params));
-            dispatch(getCartData(profileData.auth_token));
+            let del = await dispatch(removeCartItem(params));
+            if(del){
+              let data = await dispatch(getCartData(profileData.auth_token));
+              if(data){
+  
+                setLoader(false)
+              }
+            }
+
           },
         },
       ],
@@ -79,8 +87,8 @@ const CartItem = ({ item }) => {
           <Text style={styles.itemName}>
             Item Id : {item.id}
           </Text>
-          <Text style={styles.itemQuantity}>Quantity: {item.quantity}</Text>
-          <Text style={[styles.itemName,{fontSize:12}]}>
+          <Text style={styles.itemQuantity}>Quantity: {item.quantity} {item?.unit_of_measure}</Text>
+          <Text style={[styles.itemName, { fontSize: 12 }]}>
             {item.product_name}  ({item.item_description})
           </Text>
           {/* <Text style={[styles.itemName,{fontSize:12}]}>
@@ -89,10 +97,15 @@ const CartItem = ({ item }) => {
         </View>
       </View>
       <TouchableOpacity onPress={handleDeleteCartItem}>
-        <Image
-          source={require('../../Assets/Icons/delete.png')}
-          style={styles.deleteIcon}
-        />
+        {loader ?
+          <ActivityIndicator style={{marginRight: wp('5%'),}} size={'small'} color={'red'} />
+          :
+          <Image
+            source={require('../../Assets/Icons/delete.png')}
+            style={styles.deleteIcon}
+          />
+        }
+
       </TouchableOpacity>
     </View>
   );

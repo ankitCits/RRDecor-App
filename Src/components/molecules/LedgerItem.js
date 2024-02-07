@@ -82,7 +82,7 @@ const LedgerItem = ({ item }) => {
 
   function convertToDecimal(number) {
     return Number(number).toFixed(2);
-}
+  }
 
   const addUrl = item.product_image;
   return (
@@ -93,6 +93,7 @@ const LedgerItem = ({ item }) => {
           width: '70%',
           height: '80%',
           justifyContent: 'space-evenly',
+          left: '30%'
         }}>
         {/* <View style={styles.textContainer}>
           <Text style={styles.titleText}>
@@ -107,48 +108,94 @@ const LedgerItem = ({ item }) => {
           <Text style={styles.subTitleText}>{item.aws_no}</Text>
         </View> */}
 
-          <View style={styles.textContainer}>
-            <Text style={styles.titleText}>
-              Posting Date: {formatDate(item.posting_date)}
-            </Text>
-
-          </View>
         <View style={styles.textContainer}>
-            <Text style={styles.titleText}>
-              Document No: {item.document_number}
-            </Text>
-          </View>
+          <Text style={styles.titleText}>
+            Document Type:
+          </Text>
+
+          <Text style={styles.titleText2}>
+            {item?.document_type}
+          </Text>
+
+        </View>
+
+
+
         <View
           style={{}}
         >
-          <View style={styles.textContainer}>
+          <View >
 
             {item.credit_amount == '0' ?
-              <Text style={[styles.titleText, { color: 'red' }]}>
-                Debited: {convertToDecimal(item.debit_amount)}
-              </Text> :
 
-              <Text style={[styles.titleText, { color: 'green' }]}>
-                Credited: {convertToDecimal(item.credit_amount)}
-              </Text>
+              <View style={styles.textContainer}>
+                <Text style={[styles.titleText,{color:'green'}]}>
+                  Debited:
+                </Text>
+
+                <Text style={[styles.titleText2,{color:'green'}]}>
+                  {convertToDecimal(item.debit_amount)}
+                </Text>
+
+              </View>
+
+
+              :
+
+              <View style={styles.textContainer}>
+                <Text style={[styles.titleText,{color:'red'}]}>
+                  Credited:
+                </Text>
+
+                <Text style={[styles.titleText2,{color:'red'}]}>
+                  {convertToDecimal(item.credit_amount)}
+                </Text>
+
+              </View>
             }
           </View>
         </View>
 
-        <View style={styles.textContainer}>
-          <Text style={[styles.titleText]}>Document Type: {item?.document_type}</Text>
 
-          {/* <Text style={[styles.subTitleText]}>{item?.document_type}</Text> */}
-        </View>
 
 
 
 
         <View style={styles.textContainer}>
           <Text style={styles.titleText}>
-            Balance: {convertToDecimal(item.total_balance)}
+            Balance:
           </Text>
+
+          <Text style={styles.titleText2}>
+            {convertToDecimal(item.total_balance)}
+          </Text>
+
         </View>
+
+        <View style={styles.textContainer}>
+          <Text style={styles.titleText}>
+            Posting Date:
+          </Text>
+
+          <Text style={styles.titleText2}>
+            {formatDate(item.posting_date)}
+          </Text>
+
+        </View>
+
+
+        <View style={styles.textContainer}>
+          <Text style={styles.titleText}>
+            Document No:
+          </Text>
+
+          <Text style={styles.titleText2}>
+            {item.document_number}
+          </Text>
+
+        </View>
+
+
 
       </View>
 
@@ -252,12 +299,26 @@ const styles = StyleSheet.create({
 
   textContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    // justifyContent:'center',
+    // alignSelf:'center',
+    // alignItems: 'center',
+    // justifyContent: 'space-between'
   },
   titleText: {
     fontSize: wp('3.5%'),
     // fontFamily: 'Poppins-Regular',
     color: '#000',
+    width: '50%',
+    // alignItems:'center'
+    // backgroundColor:'red'
+  },
+  titleText2: {
+    fontSize: wp('4%'),
+    // fontFamily: 'Poppins-Regular',
+    color: '#000',
+    width: '100%',
+    fontWeight:'600'
+    // backgroundColor:'yellow'
   },
   subTitleText: {
     fontSize: wp('3%'),
