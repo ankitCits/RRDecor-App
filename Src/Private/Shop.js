@@ -24,6 +24,7 @@ import { selectLocalCartData } from '../Redux/Slices/cartSlice';
 import { postOrderData, resetOrderStatus } from '../Redux/Slices/orderSlice';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { BASE_URL } from '../conifg';
 const Shop = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ const Shop = () => {
 
   const convertToDropdownFormatAdd = (array) => {
     const dropdownArray = array.map((item) => {
-      const label = `${item.full_address}, ${item.district}, ${item.state}, ${item.pin_code}, ${item?.mobileNo}, Gst: (${item?.gstId})`;
+      const label = `${item.full_address}, ${item.district}, ${item.state}, ${item.pin_code}, ${item?.mobileNo}, Gst: (${item?.gstId}), ${item?.companyName}`;
       return { label: label, value: item.id };
     });
     return dropdownArray;
@@ -80,7 +81,7 @@ const Shop = () => {
       redirect: 'follow'
     };
 
-    fetch("https://rrdecor.wooshelf.com/api/address/", requestOptions)
+    fetch(`${BASE_URL}/address/`, requestOptions)
       .then(response => response.json())
       .then(result => {
         if (result?.result) {

@@ -42,12 +42,15 @@ const CartItem = ({ item }) => {
               userToken: profileData.auth_token,
               id: item.id,
             };
-            dispatch(removeCartItem(params));
-            let data = await dispatch(getCartData(profileData.auth_token));
-            if(data){
-
-              setLoader(false)
+            let del = await dispatch(removeCartItem(params));
+            if(del){
+              let data = await dispatch(getCartData(profileData.auth_token));
+              if(data){
+  
+                setLoader(false)
+              }
             }
+
           },
         },
       ],

@@ -699,10 +699,17 @@ const Searching = () => {
         )}
       </View>
       <View
-        style={{ width: '90%', alignSelf: 'center', marginBottom: '90%' }}
+        style={{ width: '90%', alignSelf: 'center', marginBottom: '5%' }}
       >
         <Text>
           Please call our sales team to check physical quantity, if stock does not show here.</Text>
+      </View>
+
+      <View
+        style={{ width: '90%', alignSelf: 'center', marginBottom: '90%' }}
+      >
+        {/* <Text>
+          Please call our sales team to check physical quantity, if stock does not show here.</Text> */}
       </View>
     </ScrollView>
   );

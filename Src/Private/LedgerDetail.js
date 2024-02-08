@@ -17,7 +17,24 @@ const LedgerDetail = () => {
   }
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      {data?.length !== 0 ? (
+      {data?.length == 0 ?
+      <View
+      style={{
+        flex: 1,
+        // justifyContent:'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginTop: '50%'
+      }}
+    >
+      <Image
+        source={require('../Assets/Image/norecordfound.png')}
+        style={{ width: 120, height: 120 }}
+        resizeMode="contain"
+      />
+    </View> 
+      
+      : (
         <>
           <View
             style={styles.container}
@@ -40,22 +57,7 @@ const LedgerDetail = () => {
           />
         </>
       )
-        :
-        <View
-          style={{
-            flex: 1,
-            // justifyContent:'center',
-            alignItems: 'center',
-            alignSelf: 'center',
-            marginTop: '50%'
-          }}
-        >
-          <Image
-            source={require('../Assets/Image/norecordfound.png')}
-            style={{ width: 120, height: 120 }}
-            resizeMode="contain"
-          />
-        </View>
+        
       }
     </View>
   );

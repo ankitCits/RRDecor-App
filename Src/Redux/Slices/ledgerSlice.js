@@ -30,7 +30,8 @@ export const getLedgerDataApi = async params => {
     },
   );
   const result = await res.json();
-  //console.log('result is', result);
+  console.log('result is ledger >>>>', result);
+  // return
   return result;
 };
 
