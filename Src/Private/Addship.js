@@ -74,7 +74,7 @@ const Addship = ({ navigation }) => {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1, }}
-      behavior="padding" // Set behavior to 'padding'
+      // behavior="padding" // Set behavior to 'padding'
     >
       <ScrollView style={styles.container}>
         <Spinner visible={isLoading} />
@@ -197,9 +197,7 @@ const Addship = ({ navigation }) => {
         >
           <Text style={styles.saveButtonText}>SAVE ADDRESS</Text>
         </TouchableOpacity>
-        <View style={{height:'90%'}}>
-
-</View>
+        
       </ScrollView>
 
     </KeyboardAvoidingView>
